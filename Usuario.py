@@ -1,11 +1,36 @@
 from datetime import date
+from dataclasses import dataclass
 
+
+@dataclass
+class Familiar:
+    parentezco: str
+    nombre: str
+    apellido: str
+    fecha_nacimiento: date
+    def __init__( self, parentezco : str, nombre: str, apellido: str, fecha_nacimiento: date ):
+        self.parentezco = parentezco
+        self.nombre = nombre
+        self.apellido = apellido
+        self.fecha_nacimiento = fecha_nacimiento
+        
+@dataclass
 class Usuario:
     """
     Pertenece la Capa de Reglas de Negocio (Model)
 
     Representa a un usuario de la EPS en la aplicación
     """
+    cedula: str
+    nombre : str
+    apellido : str
+    correo : str
+    direccion : str
+    telefono : str
+    codigo_departamento : str
+    codigo_municipio : str
+    familiares : list[Familiar]
+    
     def __init__( self, cedula, nombre, apellido, correo, direccion, telefono, codigo_departamento, codigo_municipio )  :
         self.cedula = cedula
         self.nombre = nombre
@@ -56,11 +81,3 @@ class Usuario:
 
             posicion = posicion + 1
 
-
-
-class Familiar:
-    def __init__( self, parentezco : str, nombre: str, apellido: str, fecha_nacimiento: str ):
-        self.parentezco = parentezco
-        self.nombre = nombre
-        self.apellido = apellido
-        self.fecha_nacimiento = fecha_nacimiento
