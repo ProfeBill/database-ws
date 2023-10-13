@@ -25,9 +25,14 @@ def params():
 # Retorna un objeto como JSON
 @app.route('/usuario')      
 def usuario():
-    usuario_buscado = ControladorUsuarios.BuscarPorCedula( request.args["cedula"] )
-    return jsonify(usuario_buscado);
+    try:
+        usuario_buscado = ControladorUsuarios.BuscarPorCedula( request.args["cedula"] )
+        return jsonify(usuario_buscado)
+    except Exception as err:
+        # Retorna el mensaje de error de la excepcion como una cadena
+        return { "status": "error", "mensaje": "La peticion no se puede completar", "error": str(err) } 
+
     
 # Esta linea permite que nuestra aplicación se ejecute individualmente
 if __name__=='__main__':
-   app.run()
+   app.run( debug=True )
